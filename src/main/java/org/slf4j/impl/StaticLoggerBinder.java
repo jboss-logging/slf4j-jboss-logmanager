@@ -27,6 +27,8 @@ import org.slf4j.ILoggerFactory;
 
 public final class StaticLoggerBinder implements LoggerFactoryBinder {
 
+    public static final StaticLoggerBinder SINGLETON = new StaticLoggerBinder();
+
     public ILoggerFactory getLoggerFactory() {
         return new Slf4jLoggerFactory();
     }
