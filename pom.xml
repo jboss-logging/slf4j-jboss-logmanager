@@ -26,8 +26,8 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.jboss.logmanager</groupId>
-    <artifactId>jboss-logmanager-slf4j</artifactId>
+    <groupId>org.jboss.slf4j</groupId>
+    <artifactId>slf4-jboss-logmanager</artifactId>
     <packaging>jar</packaging>
     <version>1.0.0.CR1</version>
     <build>
@@ -54,13 +54,12 @@
                 </executions>
             </plugin>
         </plugins>
-        <finalName>jboss-logmanager-slf4j</finalName>
     </build>
     <dependencies>
         <dependency>
             <groupId>org.jboss.logmanager</groupId>
             <artifactId>jboss-logmanager</artifactId>
-            <version>1.1.0.CR1</version>
+            <version>1.1.0.CR2-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -72,7 +71,7 @@
         <repository>
             <id>repository.jboss.org</id>
             <name>JBoss Maven2 Repository</name>
-            <url>${repository.url}</url>
+            <url>http://repository.jboss.org/maven2</url>
         </repository>
     </distributionManagement>
 </project>
