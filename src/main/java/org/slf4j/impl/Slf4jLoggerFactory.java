@@ -22,20 +22,13 @@
 
 package org.slf4j.impl;
 
-import org.slf4j.spi.MDCAdapter;
+import org.slf4j.ILoggerFactory;
+import org.slf4j.Logger;
+import org.jboss.logmanager.LogContext;
 
-public final class StaticMDCBinder {
+public final class Slf4jLoggerFactory implements ILoggerFactory {
 
-    public static final StaticMDCBinder SINGLETON = new StaticMDCBinder();
-
-    private StaticMDCBinder() {
-    }
-
-    public MDCAdapter getMDCA() {
-        return new Slf4jMDCAdapter();
-    }
-
-    public String getMDCAdapterClassStr() {
-        return Slf4jMDCAdapter.class.getName();
+    public Logger getLogger(final String name) {
+        return new Slf4jLogger(LogContext.getLogContext().getLogger(name));
     }
 }

@@ -24,7 +24,6 @@ package org.slf4j.impl;
 
 import org.slf4j.spi.LoggerFactoryBinder;
 import org.slf4j.ILoggerFactory;
-import org.jboss.logmanager.Slf4jLoggerFactory;
 
 public final class StaticLoggerBinder implements LoggerFactoryBinder {
 

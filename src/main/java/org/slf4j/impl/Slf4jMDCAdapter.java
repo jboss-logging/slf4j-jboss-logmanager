@@ -22,20 +22,40 @@
 
 package org.slf4j.impl;
 
+import java.util.Map;
 import org.slf4j.spi.MDCAdapter;
+import org.jboss.logmanager.MDC;
 
-public final class StaticMDCBinder {
+public final class Slf4jMDCAdapter implements MDCAdapter {
 
-    public static final StaticMDCBinder SINGLETON = new StaticMDCBinder();
-
-    private StaticMDCBinder() {
+    public void put(final String key, final String val) {
+        MDC.put(key, val);
     }
 
-    public MDCAdapter getMDCA() {
-        return new Slf4jMDCAdapter();
+    public String get(final String key) {
+        return MDC.get(key);
     }
 
-    public String getMDCAdapterClassStr() {
-        return Slf4jMDCAdapter.class.getName();
+    public void remove(final String key) {
+        MDC.remove(key);
+    }
+
+    public void clear() {
+        MDC.clear();
+    }
+
+    public Map getCopyOfContextMap() {
+        return MDC.copy();
+    }
+
+    public void setContextMap(final Map contextMap) {
+        MDC.clear();
+        for (Map.Entry<?, ?> entry : ((Map<?, ?>) contextMap).entrySet()) {
+            final Object key = entry.getKey();
+            final Object value = entry.getValue();
+            if (key != null && value != null) {
+                MDC.put(key.toString(), value.toString());
+            }
+        }
     }
 }
