@@ -28,7 +28,16 @@ import org.jboss.logmanager.LogContext;
 
 public final class Slf4jLoggerFactory implements ILoggerFactory {
 
+    private static final org.jboss.logmanager.Logger.AttachmentKey<Logger> key = new org.jboss.logmanager.Logger.AttachmentKey<Logger>();
+
     public Logger getLogger(final String name) {
-        return new Slf4jLogger(LogContext.getLogContext().getLogger(name));
+        final org.jboss.logmanager.Logger lmLogger = LogContext.getLogContext().getLogger(name);
+        final Logger logger = lmLogger.getAttachment(key);
+        if (logger != null) {
+            return logger;
+        }
+        final Slf4jLogger newLogger = new Slf4jLogger(lmLogger);
+        final Logger appearingLogger = lmLogger.attachIfAbsent(key, newLogger);
+        return appearingLogger != null ? appearingLogger : newLogger;
     }
 }
