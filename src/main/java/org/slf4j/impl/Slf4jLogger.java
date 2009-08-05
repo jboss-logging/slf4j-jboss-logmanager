@@ -24,6 +24,7 @@ package org.slf4j.impl;
 
 import org.slf4j.Marker;
 import org.slf4j.helpers.MarkerIgnoringBase;
+import org.slf4j.helpers.MessageFormatter;
 import org.slf4j.spi.LocationAwareLogger;
 import org.jboss.logmanager.Logger;
 import org.jboss.logmanager.ExtLogRecord;
@@ -86,8 +87,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         if (ALT_TRACE_INT < logger.getEffectiveLevel()) {
             return;
         }
-        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.TRACE, format, LOGGER_CLASS_NAME);
-        rec.setParameters(new Object[] { arg });
+        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.TRACE, MessageFormatter.format(format, arg), LOGGER_CLASS_NAME);
         logger.logRaw(rec);
     }
 
@@ -96,8 +96,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         if (ALT_TRACE_INT < logger.getEffectiveLevel()) {
             return;
         }
-        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.TRACE, format, LOGGER_CLASS_NAME);
-        rec.setParameters(new Object[] { arg1, arg2 });
+        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.TRACE, MessageFormatter.format(format, arg1, arg2), LOGGER_CLASS_NAME);
         logger.logRaw(rec);
     }
 
@@ -106,8 +105,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         if (ALT_TRACE_INT < logger.getEffectiveLevel()) {
             return;
         }
-        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.TRACE, format, LOGGER_CLASS_NAME);
-        rec.setParameters(argArray);
+        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.TRACE, MessageFormatter.format(format, argArray), LOGGER_CLASS_NAME);
         logger.logRaw(rec);
     }
 
@@ -139,8 +137,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         if (ALT_DEBUG_INT < logger.getEffectiveLevel()) {
             return;
         }
-        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.DEBUG, format, LOGGER_CLASS_NAME);
-        rec.setParameters(new Object[] { arg });
+        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.DEBUG, MessageFormatter.format(format, arg), LOGGER_CLASS_NAME);
         logger.logRaw(rec);
     }
 
@@ -149,8 +146,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         if (ALT_DEBUG_INT < logger.getEffectiveLevel()) {
             return;
         }
-        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.DEBUG, format, LOGGER_CLASS_NAME);
-        rec.setParameters(new Object[] { arg1, arg2 });
+        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.DEBUG, MessageFormatter.format(format, arg1, arg2), LOGGER_CLASS_NAME);
         logger.logRaw(rec);
     }
 
@@ -159,8 +155,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         if (ALT_DEBUG_INT < logger.getEffectiveLevel()) {
             return;
         }
-        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.DEBUG, format, LOGGER_CLASS_NAME);
-        rec.setParameters(argArray);
+        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.DEBUG, MessageFormatter.format(format, argArray), LOGGER_CLASS_NAME);
         logger.logRaw(rec);
     }
 
@@ -192,8 +187,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         if (ALT_INFO_INT < logger.getEffectiveLevel()) {
             return;
         }
-        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.INFO, format, LOGGER_CLASS_NAME);
-        rec.setParameters(new Object[] { arg });
+        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.INFO, MessageFormatter.format(format, arg), LOGGER_CLASS_NAME);
         logger.logRaw(rec);
     }
 
@@ -202,8 +196,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         if (ALT_INFO_INT < logger.getEffectiveLevel()) {
             return;
         }
-        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.INFO, format, LOGGER_CLASS_NAME);
-        rec.setParameters(new Object[] { arg1, arg2 });
+        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.INFO, MessageFormatter.format(format, arg1, arg2), LOGGER_CLASS_NAME);
         logger.logRaw(rec);
     }
 
@@ -212,8 +205,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         if (ALT_INFO_INT < logger.getEffectiveLevel()) {
             return;
         }
-        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.INFO, format, LOGGER_CLASS_NAME);
-        rec.setParameters(argArray);
+        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.INFO, MessageFormatter.format(format, argArray), LOGGER_CLASS_NAME);
         logger.logRaw(rec);
     }
 
@@ -245,8 +237,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         if (ALT_WARN_INT < logger.getEffectiveLevel()) {
             return;
         }
-        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.WARN, format, LOGGER_CLASS_NAME);
-        rec.setParameters(new Object[] { arg });
+        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.WARN, MessageFormatter.format(format, arg), LOGGER_CLASS_NAME);
         logger.logRaw(rec);
     }
 
@@ -255,8 +246,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         if (ALT_WARN_INT < logger.getEffectiveLevel()) {
             return;
         }
-        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.WARN, format, LOGGER_CLASS_NAME);
-        rec.setParameters(new Object[] { arg1, arg2 });
+        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.WARN, MessageFormatter.format(format, arg1, arg2), LOGGER_CLASS_NAME);
         logger.logRaw(rec);
     }
 
@@ -265,8 +255,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         if (ALT_WARN_INT < logger.getEffectiveLevel()) {
             return;
         }
-        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.WARN, format, LOGGER_CLASS_NAME);
-        rec.setParameters(argArray);
+        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.WARN, MessageFormatter.format(format, argArray), LOGGER_CLASS_NAME);
         logger.logRaw(rec);
     }
 
@@ -298,8 +287,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         if (ALT_ERROR_INT < logger.getEffectiveLevel()) {
             return;
         }
-        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.ERROR, format, LOGGER_CLASS_NAME);
-        rec.setParameters(new Object[] { arg });
+        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.ERROR, MessageFormatter.format(format, arg), LOGGER_CLASS_NAME);
         logger.logRaw(rec);
     }
 
@@ -308,8 +296,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         if (ALT_ERROR_INT < logger.getEffectiveLevel()) {
             return;
         }
-        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.ERROR, format, LOGGER_CLASS_NAME);
-        rec.setParameters(new Object[] { arg1, arg2 });
+        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.ERROR, MessageFormatter.format(format, arg1, arg2), LOGGER_CLASS_NAME);
         logger.logRaw(rec);
     }
 
@@ -318,8 +305,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         if (ALT_ERROR_INT < logger.getEffectiveLevel()) {
             return;
         }
-        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.ERROR, format, LOGGER_CLASS_NAME);
-        rec.setParameters(argArray);
+        final ExtLogRecord rec = new ExtLogRecord(org.jboss.logmanager.Level.ERROR, MessageFormatter.format(format, argArray), LOGGER_CLASS_NAME);
         logger.logRaw(rec);
     }
 
