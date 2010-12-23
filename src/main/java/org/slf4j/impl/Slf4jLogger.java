@@ -64,9 +64,11 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
             case LocationAwareLogger.ERROR_INT: level = org.jboss.logmanager.Level.ERROR; break;
             default: level = org.jboss.logmanager.Level.DEBUG; break;
         }
-        final ExtLogRecord rec = new ExtLogRecord(level, message, fqcn);
-        rec.setThrown(t);
-        logger.logRaw(rec);
+        if (logger.isLoggable(level)) {
+            final ExtLogRecord rec = new ExtLogRecord(level, message, fqcn);
+            rec.setThrown(t);
+            logger.logRaw(rec);
+        }
     }
 
     /** {@inheritDoc} */
