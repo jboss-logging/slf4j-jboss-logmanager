@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source.
- * Copyright 2009, Red Hat Middleware LLC, and individual contributors
+ * Copyright 2011, Red Hat Inc., and individual contributors
  * as indicated by the @author tags. See the copyright.txt file in the
  * distribution for a full listing of individual contributors.
  *
@@ -24,7 +24,6 @@ package org.slf4j.impl;
 
 import org.slf4j.Marker;
 import org.slf4j.helpers.MarkerIgnoringBase;
-import org.slf4j.helpers.MessageFormatter;
 import org.slf4j.spi.LocationAwareLogger;
 import org.jboss.logmanager.Logger;
 import org.jboss.logmanager.ExtLogRecord;
@@ -53,7 +52,29 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
     }
 
     /** {@inheritDoc} */
+    @SuppressWarnings("unused")
     public void log(final Marker marker, final String fqcn, final int levelVal, final String message, final Throwable t) {
+        // ignore marker
+        final java.util.logging.Level level;
+        switch (levelVal) {
+            case LocationAwareLogger.TRACE_INT: level = org.jboss.logmanager.Level.TRACE; break;
+            case LocationAwareLogger.DEBUG_INT: level = org.jboss.logmanager.Level.DEBUG; break;
+            case LocationAwareLogger.INFO_INT: level = org.jboss.logmanager.Level.INFO; break;
+            case LocationAwareLogger.WARN_INT: level = org.jboss.logmanager.Level.WARN; break;
+            case LocationAwareLogger.ERROR_INT: level = org.jboss.logmanager.Level.ERROR; break;
+            default: level = org.jboss.logmanager.Level.DEBUG; break;
+        }
+        if (logger.isLoggable(level)) {
+            final ExtLogRecord rec = new ExtLogRecord(level, message, fqcn);
+            rec.setThrown(t);
+            logger.logRaw(rec);
+        }
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unused")
+    public void log(final Marker marker, final String fqcn, final int levelVal, final String fmt, final Object[] argArray, final Throwable t) {
+        final String message = MessageFormatter.arrayFormat(fmt, argArray);
         // ignore marker
         final java.util.logging.Level level;
         switch (levelVal) {
