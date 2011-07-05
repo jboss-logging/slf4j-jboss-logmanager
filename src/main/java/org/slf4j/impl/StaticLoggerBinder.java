@@ -36,4 +36,8 @@ public final class StaticLoggerBinder implements LoggerFactoryBinder {
     public String getLoggerFactoryClassStr() {
         return Slf4jLoggerFactory.class.getName();
     }
+
+    public static StaticLoggerBinder getSingleton() {
+        return SINGLETON;
+    }
 }
