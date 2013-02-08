@@ -53,26 +53,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         return logger.getName();
     }
 
-    /** {@inheritDoc} */
-    @SuppressWarnings("unused")
-    public void log(final Marker marker, final String fqcn, final int levelVal, final String message, final Throwable t) {
-        // ignore marker
-        final java.util.logging.Level level;
-        switch (levelVal) {
-            case LocationAwareLogger.TRACE_INT: level = org.jboss.logmanager.Level.TRACE; break;
-            case LocationAwareLogger.DEBUG_INT: level = org.jboss.logmanager.Level.DEBUG; break;
-            case LocationAwareLogger.INFO_INT: level = org.jboss.logmanager.Level.INFO; break;
-            case LocationAwareLogger.WARN_INT: level = org.jboss.logmanager.Level.WARN; break;
-            case LocationAwareLogger.ERROR_INT: level = org.jboss.logmanager.Level.ERROR; break;
-            default: level = org.jboss.logmanager.Level.DEBUG; break;
-        }
-        if (logger.isLoggable(level)) {
-            log(level, fqcn, message, t);
-        }
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unused")
+    @Override
     public void log(final Marker marker, final String fqcn, final int levelVal, final String fmt, final Object[] argArray, final Throwable t) {
         final String message = MessageFormatter.arrayFormat(fmt, argArray).getMessage();
         // ignore marker
@@ -90,12 +71,12 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         }
     }
 
-    /** {@inheritDoc} */
+    @Override
     public boolean isTraceEnabled() {
         return logger.isLoggable(Level.TRACE);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void trace(final String msg) {
         if (ALT_TRACE_INT < logger.getEffectiveLevel()) {
             return;
@@ -103,7 +84,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         log(org.jboss.logmanager.Level.TRACE, msg, null);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void trace(final String format, final Object arg) {
         if (ALT_TRACE_INT < logger.getEffectiveLevel()) {
             return;
@@ -112,7 +93,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         log(org.jboss.logmanager.Level.TRACE, formattingTuple.getMessage(), formattingTuple.getThrowable());
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void trace(final String format, final Object arg1, final Object arg2) {
         if (ALT_TRACE_INT < logger.getEffectiveLevel()) {
             return;
@@ -121,16 +102,16 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         log(org.jboss.logmanager.Level.TRACE, formattingTuple.getMessage(), formattingTuple.getThrowable());
     }
 
-    /** {@inheritDoc} */
-    public void trace(final String format, final Object[] argArray) {
+    @Override
+    public void trace(final String format, final Object... arguments) {
         if (ALT_TRACE_INT < logger.getEffectiveLevel()) {
             return;
         }
-        final FormattingTuple formattingTuple = MessageFormatter.arrayFormat(format, argArray);
+        final FormattingTuple formattingTuple = MessageFormatter.arrayFormat(format, arguments);
         log(org.jboss.logmanager.Level.TRACE, formattingTuple.getMessage(), formattingTuple.getThrowable());
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void trace(final String msg, final Throwable t) {
         if (ALT_TRACE_INT < logger.getEffectiveLevel()) {
             return;
@@ -138,12 +119,12 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         log(org.jboss.logmanager.Level.TRACE, msg, t);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public boolean isDebugEnabled() {
         return logger.isLoggable(Level.DEBUG);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void debug(final String msg) {
         if (ALT_DEBUG_INT < logger.getEffectiveLevel()) {
             return;
@@ -151,7 +132,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         log(org.jboss.logmanager.Level.DEBUG, msg, null);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void debug(final String format, final Object arg) {
         if (ALT_DEBUG_INT < logger.getEffectiveLevel()) {
             return;
@@ -160,7 +141,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         log(org.jboss.logmanager.Level.DEBUG, formattingTuple.getMessage(), formattingTuple.getThrowable());
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void debug(final String format, final Object arg1, final Object arg2) {
         if (ALT_DEBUG_INT < logger.getEffectiveLevel()) {
             return;
@@ -169,16 +150,16 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         log(org.jboss.logmanager.Level.DEBUG, formattingTuple.getMessage(), formattingTuple.getThrowable());
     }
 
-    /** {@inheritDoc} */
-    public void debug(final String format, final Object[] argArray) {
+    @Override
+    public void debug(final String format, final Object... arguments) {
         if (ALT_DEBUG_INT < logger.getEffectiveLevel()) {
             return;
         }
-        final FormattingTuple formattingTuple = MessageFormatter.arrayFormat(format, argArray);
+        final FormattingTuple formattingTuple = MessageFormatter.arrayFormat(format, arguments);
         log(org.jboss.logmanager.Level.DEBUG, formattingTuple.getMessage(), formattingTuple.getThrowable());
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void debug(final String msg, final Throwable t) {
         if (ALT_DEBUG_INT < logger.getEffectiveLevel()) {
             return;
@@ -186,12 +167,12 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         log(org.jboss.logmanager.Level.DEBUG, msg, t);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public boolean isInfoEnabled() {
         return logger.isLoggable(Level.INFO);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void info(final String msg) {
         if (ALT_INFO_INT < logger.getEffectiveLevel()) {
             return;
@@ -199,7 +180,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         log(org.jboss.logmanager.Level.INFO, msg, null);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void info(final String format, final Object arg) {
         if (ALT_INFO_INT < logger.getEffectiveLevel()) {
             return;
@@ -208,7 +189,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         log(org.jboss.logmanager.Level.INFO, formattingTuple.getMessage(), formattingTuple.getThrowable());
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void info(final String format, final Object arg1, final Object arg2) {
         if (ALT_INFO_INT < logger.getEffectiveLevel()) {
             return;
@@ -217,16 +198,16 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         log(org.jboss.logmanager.Level.INFO, formattingTuple.getMessage(), formattingTuple.getThrowable());
     }
 
-    /** {@inheritDoc} */
-    public void info(final String format, final Object[] argArray) {
+    @Override
+    public void info(final String format, final Object... arguments) {
         if (ALT_INFO_INT < logger.getEffectiveLevel()) {
             return;
         }
-        final FormattingTuple formattingTuple = MessageFormatter.arrayFormat(format, argArray);
+        final FormattingTuple formattingTuple = MessageFormatter.arrayFormat(format, arguments);
         log(org.jboss.logmanager.Level.INFO, formattingTuple.getMessage(), formattingTuple.getThrowable());
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void info(final String msg, final Throwable t) {
         if (ALT_INFO_INT < logger.getEffectiveLevel()) {
             return;
@@ -234,12 +215,12 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         log(org.jboss.logmanager.Level.INFO, msg, t);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public boolean isWarnEnabled() {
         return logger.isLoggable(Level.WARN);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void warn(final String msg) {
         if (ALT_WARN_INT < logger.getEffectiveLevel()) {
             return;
@@ -247,7 +228,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         log(org.jboss.logmanager.Level.WARN, msg, null);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void warn(final String format, final Object arg) {
         if (ALT_WARN_INT < logger.getEffectiveLevel()) {
             return;
@@ -256,7 +237,16 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         log(org.jboss.logmanager.Level.WARN, formattingTuple.getMessage(), formattingTuple.getThrowable());
     }
 
-    /** {@inheritDoc} */
+    @Override
+    public void warn(final String format, final Object... arguments) {
+        if (ALT_WARN_INT < logger.getEffectiveLevel()) {
+            return;
+        }
+        final FormattingTuple formattingTuple = MessageFormatter.arrayFormat(format, arguments);
+        log(org.jboss.logmanager.Level.WARN, formattingTuple.getMessage(), formattingTuple.getThrowable());
+    }
+
+    @Override
     public void warn(final String format, final Object arg1, final Object arg2) {
         if (ALT_WARN_INT < logger.getEffectiveLevel()) {
             return;
@@ -265,16 +255,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         log(org.jboss.logmanager.Level.WARN, formattingTuple.getMessage(), formattingTuple.getThrowable());
     }
 
-    /** {@inheritDoc} */
-    public void warn(final String format, final Object[] argArray) {
-        if (ALT_WARN_INT < logger.getEffectiveLevel()) {
-            return;
-        }
-        final FormattingTuple formattingTuple = MessageFormatter.arrayFormat(format, argArray);
-        log(org.jboss.logmanager.Level.WARN, formattingTuple.getMessage(), formattingTuple.getThrowable());
-    }
-
-    /** {@inheritDoc} */
+    @Override
     public void warn(final String msg, final Throwable t) {
         if (ALT_WARN_INT < logger.getEffectiveLevel()) {
             return;
@@ -282,12 +263,12 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         log(org.jboss.logmanager.Level.WARN, msg, t);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public boolean isErrorEnabled() {
         return logger.isLoggable(Level.ERROR);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void error(final String msg) {
         if (ALT_ERROR_INT < logger.getEffectiveLevel()) {
             return;
@@ -295,7 +276,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         log(org.jboss.logmanager.Level.ERROR, msg, null);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void error(final String format, final Object arg) {
         if (ALT_ERROR_INT < logger.getEffectiveLevel()) {
             return;
@@ -304,7 +285,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         log(org.jboss.logmanager.Level.ERROR, formattingTuple.getMessage(), formattingTuple.getThrowable());
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void error(final String format, final Object arg1, final Object arg2) {
         if (ALT_ERROR_INT < logger.getEffectiveLevel()) {
             return;
@@ -313,16 +294,16 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         log(org.jboss.logmanager.Level.ERROR, formattingTuple.getMessage(), formattingTuple.getThrowable());
     }
 
-    /** {@inheritDoc} */
-    public void error(final String format, final Object[] argArray) {
+    @Override
+    public void error(final String format, final Object... arguments) {
         if (ALT_ERROR_INT < logger.getEffectiveLevel()) {
             return;
         }
-        final FormattingTuple formattingTuple = MessageFormatter.arrayFormat(format, argArray);
+        final FormattingTuple formattingTuple = MessageFormatter.arrayFormat(format, arguments);
         log(org.jboss.logmanager.Level.ERROR, formattingTuple.getMessage(), formattingTuple.getThrowable());
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void error(final String msg, final Throwable t) {
         if (ALT_ERROR_INT < logger.getEffectiveLevel()) {
             return;
@@ -330,7 +311,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
         log(org.jboss.logmanager.Level.ERROR, msg, t);
     }
 
-    /** {@inheritDoc} */
+    @Override
     protected Slf4jLogger readResolve() throws ObjectStreamException {
         return this;
     }

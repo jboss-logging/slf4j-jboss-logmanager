@@ -36,8 +36,13 @@
     <parent>
         <groupId>org.jboss</groupId>
         <artifactId>jboss-parent</artifactId>
-        <version>6-beta-2</version>
+        <version>9</version>
     </parent>
+
+    <properties>
+        <version.org.jboss.logmanager>1.4.0.Final</version.org.jboss.logmanager>
+        <version.org.slf4j>1.7.2</version.org.slf4j>
+    </properties>
 
     <build>
         <plugins>
@@ -53,13 +58,13 @@
         <dependency>
             <groupId>org.jboss.logmanager</groupId>
             <artifactId>jboss-logmanager</artifactId>
-            <version>1.2.0.GA</version>
+            <version>${version.org.jboss.logmanager}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.6.1</version>
+            <version>${version.org.slf4j}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
