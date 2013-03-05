@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source.
- * Copyright 2009, Red Hat Middleware LLC, and individual contributors
+ * Copyright 2013, Red Hat Inc., and individual contributors
  * as indicated by the @author tags. See the copyright.txt file in the
  * distribution for a full listing of individual contributors.
  *
@@ -22,26 +22,29 @@
 
 package org.slf4j.impl;
 
+import java.security.PrivilegedAction;
 import org.slf4j.ILoggerFactory;
 import org.slf4j.Logger;
 import org.jboss.logmanager.LogContext;
+
+import static java.security.AccessController.doPrivileged;
 
 public final class Slf4jLoggerFactory implements ILoggerFactory {
 
     private static final org.jboss.logmanager.Logger.AttachmentKey<Logger> key = new org.jboss.logmanager.Logger.AttachmentKey<Logger>();
 
     public Logger getLogger(final String name) {
-        Logger logger = LogContext.getLogContext().getAttachment(name, key);
-        if (logger != null) {
-            return logger;
-        }
         final org.jboss.logmanager.Logger lmLogger = LogContext.getLogContext().getLogger(name);
-        logger = lmLogger.getAttachment(key);
+        final Logger logger = lmLogger.getAttachment(key);
         if (logger != null) {
             return logger;
         }
-        final Slf4jLogger newLogger = new Slf4jLogger(lmLogger);
-        final Logger appearingLogger = lmLogger.attachIfAbsent(key, newLogger);
-        return appearingLogger != null ? appearingLogger : newLogger;
+        return doPrivileged(new PrivilegedAction<Logger>() {
+            public Logger run() {
+                final Slf4jLogger newLogger = new Slf4jLogger(lmLogger);
+                final Logger appearingLogger = lmLogger.attachIfAbsent(key, newLogger);
+                return appearingLogger != null ? appearingLogger : newLogger;
+            }
+        });
     }
 }
