@@ -26,19 +26,19 @@
     <groupId>org.jboss.slf4j</groupId>
     <artifactId>slf4j-jboss-logmanager</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.5.GA-SNAPSHOT</version>
+    <version>1.1.0.Final-SNAPSHOT</version>
 
     <name>SLF4J: JBoss Log Manager</name>
 
     <parent>
         <groupId>org.jboss</groupId>
         <artifactId>jboss-parent</artifactId>
-        <version>9</version>
+        <version>34</version>
     </parent>
 
     <properties>
-        <version.org.jboss.logmanager>1.4.0.Final</version.org.jboss.logmanager>
-        <version.org.slf4j>1.7.2</version.org.slf4j>
+        <version.org.jboss.logmanager>2.1.10.Final</version.org.jboss.logmanager>
+        <version.org.slf4j>1.7.22</version.org.slf4j>
     </properties>
 
     <licenses>
