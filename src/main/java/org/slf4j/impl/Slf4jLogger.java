@@ -64,7 +64,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
             default: level = org.jboss.logmanager.Level.DEBUG; break;
         }
         if (logger.isLoggable(level)) {
-            log(level, fqcn, message, t);
+            log(level, fqcn, message, t, argArray);
         }
     }
 
@@ -87,7 +87,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
             return;
         }
         final FormattingTuple formattingTuple = MessageFormatter.format(format, arg);
-        log(org.jboss.logmanager.Level.TRACE, formattingTuple.getMessage(), formattingTuple.getThrowable());
+        log(org.jboss.logmanager.Level.TRACE, formattingTuple.getMessage(), formattingTuple.getThrowable(), arg);
     }
 
     @Override
@@ -96,7 +96,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
             return;
         }
         final FormattingTuple formattingTuple = MessageFormatter.format(format, arg1, arg2);
-        log(org.jboss.logmanager.Level.TRACE, formattingTuple.getMessage(), formattingTuple.getThrowable());
+        log(org.jboss.logmanager.Level.TRACE, formattingTuple.getMessage(), formattingTuple.getThrowable(), arg1, arg2);
     }
 
     @Override
@@ -105,7 +105,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
             return;
         }
         final FormattingTuple formattingTuple = MessageFormatter.arrayFormat(format, arguments);
-        log(org.jboss.logmanager.Level.TRACE, formattingTuple.getMessage(), formattingTuple.getThrowable());
+        log(org.jboss.logmanager.Level.TRACE, formattingTuple.getMessage(), formattingTuple.getThrowable(), arguments);
     }
 
     @Override
@@ -135,7 +135,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
             return;
         }
         final FormattingTuple formattingTuple = MessageFormatter.format(format, arg);
-        log(org.jboss.logmanager.Level.DEBUG, formattingTuple.getMessage(), formattingTuple.getThrowable());
+        log(org.jboss.logmanager.Level.DEBUG, formattingTuple.getMessage(), formattingTuple.getThrowable(), arg);
     }
 
     @Override
@@ -144,7 +144,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
             return;
         }
         final FormattingTuple formattingTuple = MessageFormatter.format(format, arg1, arg2);
-        log(org.jboss.logmanager.Level.DEBUG, formattingTuple.getMessage(), formattingTuple.getThrowable());
+        log(org.jboss.logmanager.Level.DEBUG, formattingTuple.getMessage(), formattingTuple.getThrowable(), arg1, arg2);
     }
 
     @Override
@@ -153,7 +153,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
             return;
         }
         final FormattingTuple formattingTuple = MessageFormatter.arrayFormat(format, arguments);
-        log(org.jboss.logmanager.Level.DEBUG, formattingTuple.getMessage(), formattingTuple.getThrowable());
+        log(org.jboss.logmanager.Level.DEBUG, formattingTuple.getMessage(), formattingTuple.getThrowable(), arguments);
     }
 
     @Override
@@ -183,7 +183,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
             return;
         }
         final FormattingTuple formattingTuple = MessageFormatter.format(format, arg);
-        log(org.jboss.logmanager.Level.INFO, formattingTuple.getMessage(), formattingTuple.getThrowable());
+        log(org.jboss.logmanager.Level.INFO, formattingTuple.getMessage(), formattingTuple.getThrowable(), arg);
     }
 
     @Override
@@ -192,7 +192,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
             return;
         }
         final FormattingTuple formattingTuple = MessageFormatter.format(format, arg1, arg2);
-        log(org.jboss.logmanager.Level.INFO, formattingTuple.getMessage(), formattingTuple.getThrowable());
+        log(org.jboss.logmanager.Level.INFO, formattingTuple.getMessage(), formattingTuple.getThrowable(), arg1, arg2);
     }
 
     @Override
@@ -201,7 +201,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
             return;
         }
         final FormattingTuple formattingTuple = MessageFormatter.arrayFormat(format, arguments);
-        log(org.jboss.logmanager.Level.INFO, formattingTuple.getMessage(), formattingTuple.getThrowable());
+        log(org.jboss.logmanager.Level.INFO, formattingTuple.getMessage(), formattingTuple.getThrowable(), arguments);
     }
 
     @Override
@@ -231,7 +231,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
             return;
         }
         final FormattingTuple formattingTuple = MessageFormatter.format(format, arg);
-        log(org.jboss.logmanager.Level.WARN, formattingTuple.getMessage(), formattingTuple.getThrowable());
+        log(org.jboss.logmanager.Level.WARN, formattingTuple.getMessage(), formattingTuple.getThrowable(), arg);
     }
 
     @Override
@@ -240,7 +240,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
             return;
         }
         final FormattingTuple formattingTuple = MessageFormatter.arrayFormat(format, arguments);
-        log(org.jboss.logmanager.Level.WARN, formattingTuple.getMessage(), formattingTuple.getThrowable());
+        log(org.jboss.logmanager.Level.WARN, formattingTuple.getMessage(), formattingTuple.getThrowable(), arguments);
     }
 
     @Override
@@ -249,7 +249,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
             return;
         }
         final FormattingTuple formattingTuple = MessageFormatter.format(format, arg1, arg2);
-        log(org.jboss.logmanager.Level.WARN, formattingTuple.getMessage(), formattingTuple.getThrowable());
+        log(org.jboss.logmanager.Level.WARN, formattingTuple.getMessage(), formattingTuple.getThrowable(), arg1, arg2);
     }
 
     @Override
@@ -279,7 +279,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
             return;
         }
         final FormattingTuple formattingTuple = MessageFormatter.format(format, arg);
-        log(org.jboss.logmanager.Level.ERROR, formattingTuple.getMessage(), formattingTuple.getThrowable());
+        log(org.jboss.logmanager.Level.ERROR, formattingTuple.getMessage(), formattingTuple.getThrowable(), arg);
     }
 
     @Override
@@ -288,7 +288,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
             return;
         }
         final FormattingTuple formattingTuple = MessageFormatter.format(format, arg1, arg2);
-        log(org.jboss.logmanager.Level.ERROR, formattingTuple.getMessage(), formattingTuple.getThrowable());
+        log(org.jboss.logmanager.Level.ERROR, formattingTuple.getMessage(), formattingTuple.getThrowable(), arg1, arg2);
     }
 
     @Override
@@ -297,7 +297,7 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
             return;
         }
         final FormattingTuple formattingTuple = MessageFormatter.arrayFormat(format, arguments);
-        log(org.jboss.logmanager.Level.ERROR, formattingTuple.getMessage(), formattingTuple.getThrowable());
+        log(org.jboss.logmanager.Level.ERROR, formattingTuple.getMessage(), formattingTuple.getThrowable(), arguments);
     }
 
     @Override
@@ -314,12 +314,19 @@ public final class Slf4jLogger extends MarkerIgnoringBase implements Serializabl
     }
 
     private void log(final java.util.logging.Level level, final String message, final Throwable t) {
-        log(level, LOGGER_CLASS_NAME, message, t);
+        final ExtLogRecord rec = new ExtLogRecord(level, message, LOGGER_CLASS_NAME);
+        rec.setThrown(t);
+        logger.logRaw(rec);
     }
 
-    private void log(final java.util.logging.Level level,  final String fqcn, final String message, final Throwable t) {
-        final ExtLogRecord rec = new ExtLogRecord(level, message, fqcn);
+    private void log(final java.util.logging.Level level, final String message, final Throwable t, final Object... params) {
+        log(level, LOGGER_CLASS_NAME, message, t, params);
+    }
+
+    private void log(final java.util.logging.Level level,  final String fqcn, final String message, final Throwable t, final Object[] params) {
+        final ExtLogRecord rec = new ExtLogRecord(level, message, ExtLogRecord.FormatStyle.NO_FORMAT, fqcn);
         rec.setThrown(t);
+        rec.setParameters(params);
         logger.logRaw(rec);
     }
 }
