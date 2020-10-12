@@ -37,7 +37,7 @@
     </parent>
 
     <properties>
-        <version.org.jboss.logmanager>2.1.10.Final</version.org.jboss.logmanager>
+        <version.org.jboss.logmanager>2.1.17.Final</version.org.jboss.logmanager>
         <version.org.slf4j>1.7.22</version.org.slf4j>
     </properties>
 
