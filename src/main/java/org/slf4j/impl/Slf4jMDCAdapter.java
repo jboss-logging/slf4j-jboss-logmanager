@@ -41,7 +41,7 @@ public final class Slf4jMDCAdapter implements MDCAdapter {
         MDC.clear();
     }
 
-    public Map getCopyOfContextMap() {
+    public Map<String, String> getCopyOfContextMap() {
         return MDC.copy();
     }
 
