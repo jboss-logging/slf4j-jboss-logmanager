@@ -33,12 +33,12 @@
     <parent>
         <groupId>org.jboss</groupId>
         <artifactId>jboss-parent</artifactId>
-        <version>34</version>
+        <version>37</version>
     </parent>
 
     <properties>
-        <version.org.jboss.logmanager>2.1.10.Final</version.org.jboss.logmanager>
-        <version.org.slf4j>1.7.22</version.org.slf4j>
+        <version.org.jboss.logmanager>2.1.17.Final</version.org.jboss.logmanager>
+        <version.org.slf4j>1.7.30</version.org.slf4j>
     </properties>
 
     <licenses>
