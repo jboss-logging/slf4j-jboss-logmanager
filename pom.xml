@@ -39,6 +39,8 @@
     <properties>
         <version.org.jboss.logmanager>2.1.17.Final</version.org.jboss.logmanager>
         <version.org.slf4j>1.7.30</version.org.slf4j>
+        <!-- Test dependencies -->
+        <version.junit>4.12</version.junit>
     </properties>
 
     <licenses>
@@ -71,6 +73,14 @@
             <artifactId>slf4j-api</artifactId>
             <version>${version.org.slf4j}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${version.junit}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
