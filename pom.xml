@@ -40,7 +40,7 @@
         <version.org.jboss.logmanager>2.1.17.Final</version.org.jboss.logmanager>
         <version.org.slf4j>1.7.30</version.org.slf4j>
         <!-- Test dependencies -->
-        <version.junit>4.12</version.junit>
+        <version.junit>4.13.1</version.junit>
     </properties>
 
     <licenses>
