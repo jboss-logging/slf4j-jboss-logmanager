@@ -23,25 +23,36 @@ import java.security.PrivilegedAction;
 import org.slf4j.ILoggerFactory;
 import org.slf4j.Logger;
 import org.jboss.logmanager.LogContext;
+import java.util.HashMap;
+import java.util.Map;
 
 import static java.security.AccessController.doPrivileged;
 
 public final class Slf4jLoggerFactory implements ILoggerFactory {
 
-    private static final org.jboss.logmanager.Logger.AttachmentKey<Logger> key = new org.jboss.logmanager.Logger.AttachmentKey<Logger>();
+    /**
+     * JBossLoggerAdapter cache
+     */
+    private static final Map<String, Logger> loggerMap = new HashMap<>();
+    private static final LogContext logContext = LogContext.getLogContext();
 
-    public Logger getLogger(final String name) {
-        final org.jboss.logmanager.Logger lmLogger = LogContext.getLogContext().getLogger(name);
-        final Logger logger = lmLogger.getAttachment(key);
-        if (logger != null) {
-            return logger;
+    /**
+     * @see org.slf4j.ILoggerFactory#getLogger(java.lang.String)
+     */
+    public Logger getLogger(String name) {
+        Logger slf4jLogger;
+
+        // protect against concurrent access of loggerMap
+        synchronized (loggerMap) {
+            slf4jLogger = loggerMap.computeIfAbsent(name, n -> doPrivileged((PrivilegedAction<Logger>) () -> {
+
+                // create a new jboss logger
+                final org.jboss.logmanager.Logger jbossLogger = logContext.getLogger(name);
+
+                // wrap it with an adapter
+                return (Logger) new Slf4jLogger(jbossLogger);
+            }));
         }
-        return doPrivileged(new PrivilegedAction<Logger>() {
-            public Logger run() {
-                final Slf4jLogger newLogger = new Slf4jLogger(lmLogger);
-                final Logger appearingLogger = lmLogger.attachIfAbsent(key, newLogger);
-                return appearingLogger != null ? appearingLogger : newLogger;
-            }
-        });
+        return slf4jLogger;
     }
 }
