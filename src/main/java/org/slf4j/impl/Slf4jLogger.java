@@ -29,6 +29,9 @@ import org.jboss.logmanager.Level;
 
 import java.io.Serializable;
 import java.io.ObjectStreamException;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 
 public final class Slf4jLogger implements Serializable, LocationAwareLogger {
     private final Logger logger;
@@ -547,10 +550,14 @@ public final class Slf4jLogger implements Serializable, LocationAwareLogger {
         log(null, org.jboss.logmanager.Level.ERROR, msg, t);
     }
 
+    protected Slf4jLogger readResolve() throws ObjectStreamException {
+        return this;
+    }
+
     private void log(final Marker marker, final java.util.logging.Level level, final String message, final Throwable t) {
         final ExtLogRecord rec = new ExtLogRecord(level, message, LOGGER_CLASS_NAME);
         rec.setThrown(t);
-        // TODO: rec.setMarker(marker);
+        setMarker(rec, marker);
         logger.logRaw(rec);
     }
 
@@ -562,11 +569,31 @@ public final class Slf4jLogger implements Serializable, LocationAwareLogger {
         final ExtLogRecord rec = new ExtLogRecord(level, message, ExtLogRecord.FormatStyle.NO_FORMAT, fqcn);
         rec.setThrown(t);
         rec.setParameters(params);
-        // TODO: rec.setMarker(marker);
+        setMarker(rec, marker);
         logger.logRaw(rec);
     }
 
-    protected Slf4jLogger readResolve() throws ObjectStreamException {
-        return this;
+    private void setMarker( ExtLogRecord rec, Marker marker) {
+        if (MARKER_SETTER != null) {
+            try {
+                MARKER_SETTER.invokeExact(rec, marker);
+            } catch (Throwable e) {
+                // ignored
+            }
+        }
     }
+
+    private static final MethodHandle MARKER_SETTER;
+
+    static {
+        MethodHandle setMarker = null;
+        try {
+            setMarker = MethodHandles.lookup().findVirtual(ExtLogRecord.class, "setMarker", MethodType.methodType(void.class, Object.class));
+        } catch (ReflectiveOperationException ignored) {
+            // old version of jboss-logmanager
+        } finally {
+            MARKER_SETTER = setMarker;
+        }
+    }
+
 }
