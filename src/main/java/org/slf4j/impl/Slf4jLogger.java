@@ -51,7 +51,6 @@ public final class Slf4jLogger implements Serializable, LocationAwareLogger {
 
     @Override
     public void log(final Marker marker, final String fqcn, final int levelVal, final String fmt, final Object[] argArray, final Throwable t) {
-        final String message = MessageFormatter.arrayFormat(fmt, argArray).getMessage();
         final java.util.logging.Level level;
         switch (levelVal) {
             case LocationAwareLogger.TRACE_INT: level = org.jboss.logmanager.Level.TRACE; break;
@@ -62,6 +61,7 @@ public final class Slf4jLogger implements Serializable, LocationAwareLogger {
             default: level = org.jboss.logmanager.Level.DEBUG; break;
         }
         if (logger.isLoggable(level)) {
+            final String message = MessageFormatter.arrayFormat(fmt, argArray).getMessage();
             log(marker, level, fqcn, message, t, argArray);
         }
     }
@@ -562,7 +562,7 @@ public final class Slf4jLogger implements Serializable, LocationAwareLogger {
         final ExtLogRecord rec = new ExtLogRecord(level, message, ExtLogRecord.FormatStyle.NO_FORMAT, fqcn);
         rec.setThrown(t);
         rec.setParameters(params);
-        // TODO: rec.setMarker();
+        // TODO: rec.setMarker(marker);
         logger.logRaw(rec);
     }
 
