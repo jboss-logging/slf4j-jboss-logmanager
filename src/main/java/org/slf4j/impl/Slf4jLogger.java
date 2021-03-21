@@ -550,7 +550,7 @@ public final class Slf4jLogger implements Serializable, LocationAwareLogger {
         log(null, org.jboss.logmanager.Level.ERROR, msg, t);
     }
 
-    protected Slf4jLogger readResolve() throws ObjectStreamException {
+    protected Object readResolve() throws ObjectStreamException {
         return this;
     }
 
