@@ -36,6 +36,9 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
+import org.slf4j.Marker;
+import org.slf4j.helpers.BasicMarker;
+import org.slf4j.helpers.BasicMarkerFactory;
 
 /**
  * @author <a href="mailto:jperkins@redhat.com">James R. Perkins</a>
@@ -103,7 +106,17 @@ public class LoggerTestCase {
         Assert.assertNotNull(record);
         Assert.assertEquals("This is a test formatted {message}", record.getMessage());
         Assert.assertEquals("Cause is different from the expected cause", e, record.getThrown());
+    }
 
+    @Test
+    public void testLoggerWithMarkers() {
+        final Logger logger = LoggerFactory.getLogger(LoggerTestCase.class);
+        final Marker marker = new BasicMarkerFactory().getMarker("test");
+
+        logger.info(marker, "log message");
+        LogRecord record = HANDLER.messages.poll();
+        Assert.assertNotNull(record);
+        // TODO: record.getMarker() must be same instance of "marker"
     }
 
     @Test
