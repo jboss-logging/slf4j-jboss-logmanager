@@ -573,10 +573,10 @@ public final class Slf4jLogger implements Serializable, LocationAwareLogger {
         logger.logRaw(rec);
     }
 
-    private void setMarker( ExtLogRecord rec, Marker marker) {
+    private void setMarker(ExtLogRecord rec, Marker marker) {
         if (MARKER_SETTER != null) {
             try {
-                MARKER_SETTER.invokeExact(rec, marker);
+                MARKER_SETTER.invoke(rec, marker);
             } catch (Throwable e) {
                 // ignored
             }
