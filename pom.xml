@@ -37,15 +37,15 @@
     </parent>
 
     <properties>
-        <version.junit>4.13.1</version.junit>
-        <version.org.jboss.logmanager>2.1.17.Final</version.org.jboss.logmanager>
-        <version.org.slf4j>1.7.30</version.org.slf4j>
+        <version.junit>4.13.2</version.junit>
+        <version.org.jboss.logmanager>2.1.18.Final</version.org.jboss.logmanager>
+        <version.org.slf4j>1.7.36</version.org.slf4j>
     </properties>
 
     <licenses>
         <license>
             <name>Apache License 2.0</name>
-            <url>http://repository.jboss.org/licenses/apache-2.0.txt</url>
+            <url>https://repository.jboss.org/licenses/apache-2.0.txt</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
