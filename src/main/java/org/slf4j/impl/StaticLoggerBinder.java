@@ -31,7 +31,7 @@ public final class StaticLoggerBinder implements LoggerFactoryBinder {
      * The value of this field is usually modified with each release.
      */
     // to avoid constant folding by the compiler, this field must *not* be final
-    public static String REQUESTED_API_VERSION = "1.7.2";
+    public static String REQUESTED_API_VERSION = "2.0.5";
 
     public ILoggerFactory getLoggerFactory() {
         return new Slf4jLoggerFactory();

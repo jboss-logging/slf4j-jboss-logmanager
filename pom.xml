@@ -39,7 +39,7 @@
     <properties>
         <version.junit>4.13.2</version.junit>
         <version.org.jboss.logmanager>2.1.18.Final</version.org.jboss.logmanager>
-        <version.org.slf4j>1.7.36</version.org.slf4j>
+        <version.org.slf4j>2.0.5</version.org.slf4j>
     </properties>
 
     <licenses>
