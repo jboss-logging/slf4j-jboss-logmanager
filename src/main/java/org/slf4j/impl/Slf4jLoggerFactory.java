@@ -19,16 +19,17 @@
 
 package org.slf4j.impl;
 
+import static java.security.AccessController.doPrivileged;
+
 import java.security.PrivilegedAction;
+
+import org.jboss.logmanager.LogContext;
 import org.slf4j.ILoggerFactory;
 import org.slf4j.Logger;
-import org.jboss.logmanager.LogContext;
-
-import static java.security.AccessController.doPrivileged;
 
 public final class Slf4jLoggerFactory implements ILoggerFactory {
 
-    private static final org.jboss.logmanager.Logger.AttachmentKey<Logger> key = new org.jboss.logmanager.Logger.AttachmentKey<Logger>();
+    private static final org.jboss.logmanager.Logger.AttachmentKey<Logger> key = new org.jboss.logmanager.Logger.AttachmentKey<>();
 
     public Logger getLogger(final String name) {
         final org.jboss.logmanager.Logger lmLogger = LogContext.getLogContext().getLogger(name);
@@ -36,12 +37,10 @@ public final class Slf4jLoggerFactory implements ILoggerFactory {
         if (logger != null) {
             return logger;
         }
-        return doPrivileged(new PrivilegedAction<Logger>() {
-            public Logger run() {
-                final Slf4jLogger newLogger = new Slf4jLogger(lmLogger);
-                final Logger appearingLogger = lmLogger.attachIfAbsent(key, newLogger);
-                return appearingLogger != null ? appearingLogger : newLogger;
-            }
+        return doPrivileged((PrivilegedAction<Logger>) () -> {
+            final Logger newLogger = new Slf4jLogger(lmLogger);
+            final Logger appearingLogger = lmLogger.attachIfAbsent(key, newLogger);
+            return appearingLogger != null ? appearingLogger : newLogger;
         });
     }
 }

@@ -37,7 +37,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.slf4j.Marker;
-import org.slf4j.helpers.BasicMarker;
 import org.slf4j.helpers.BasicMarkerFactory;
 
 /**
@@ -85,7 +84,7 @@ public class LoggerTestCase {
         record = HANDLER.messages.poll();
         Assert.assertNotNull(record);
         Assert.assertEquals("This is a test formatted {message}", record.getFormattedMessage());
-        Assert.assertArrayEquals("Expected parameter not found.", new Object[] {"{message}"}, record.getParameters());
+        Assert.assertArrayEquals("Expected parameter not found.", new Object[] { "{message}" }, record.getParameters());
     }
 
     @Test
@@ -121,7 +120,8 @@ public class LoggerTestCase {
 
     @Test
     public void testMDC() {
-        Assert.assertSame(expectedTypeMessage(Slf4jMDCAdapter.class, MDC.getMDCAdapter().getClass()), MDC.getMDCAdapter().getClass(), Slf4jMDCAdapter.class);
+        Assert.assertSame(expectedTypeMessage(Slf4jMDCAdapter.class, MDC.getMDCAdapter().getClass()),
+                MDC.getMDCAdapter().getClass(), Slf4jMDCAdapter.class);
         final String key = Long.toHexString(System.currentTimeMillis());
         MDC.put(key, "value");
         Assert.assertEquals("MDC value should be \"value\"", "value", MDC.get(key));

@@ -1,5 +1,30 @@
+# Ignore Maven target folder
+target/
+dependency-reduced-pom.xml
+
+# Formatting cache
+.cache/
+
+# Intellij
+*.iml
 *.ipr
 *.iws
-*.iml
-target
 .idea
+
+# Eclipse
+.settings/
+.classpath
+.project
+.factorypath
+
+# ignore NetBeans files
+nbactions.xml
+nb-configuration.xml
+catalog.xml
+nbproject
+
+# VS Code
+**/.vscode/
+
+# macOS Files
+.DS_Store

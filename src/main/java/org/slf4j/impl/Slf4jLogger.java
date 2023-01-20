@@ -19,19 +19,19 @@
 
 package org.slf4j.impl;
 
+import java.io.ObjectStreamException;
+import java.io.Serializable;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
+
+import org.jboss.logmanager.ExtLogRecord;
+import org.jboss.logmanager.Level;
+import org.jboss.logmanager.Logger;
 import org.slf4j.Marker;
 import org.slf4j.helpers.FormattingTuple;
 import org.slf4j.helpers.MessageFormatter;
 import org.slf4j.spi.LocationAwareLogger;
-import org.jboss.logmanager.Logger;
-import org.jboss.logmanager.ExtLogRecord;
-import org.jboss.logmanager.Level;
-
-import java.io.Serializable;
-import java.io.ObjectStreamException;
-import java.lang.invoke.MethodHandle;
-import java.lang.invoke.MethodHandles;
-import java.lang.invoke.MethodType;
 
 public final class Slf4jLogger implements Serializable, LocationAwareLogger {
     private final Logger logger;
@@ -53,15 +53,28 @@ public final class Slf4jLogger implements Serializable, LocationAwareLogger {
     }
 
     @Override
-    public void log(final Marker marker, final String fqcn, final int levelVal, final String fmt, final Object[] argArray, final Throwable t) {
+    public void log(final Marker marker, final String fqcn, final int levelVal, final String fmt, final Object[] argArray,
+            final Throwable t) {
         final java.util.logging.Level level;
         switch (levelVal) {
-            case LocationAwareLogger.TRACE_INT: level = org.jboss.logmanager.Level.TRACE; break;
-            case LocationAwareLogger.DEBUG_INT: level = org.jboss.logmanager.Level.DEBUG; break;
-            case LocationAwareLogger.INFO_INT: level = org.jboss.logmanager.Level.INFO; break;
-            case LocationAwareLogger.WARN_INT: level = org.jboss.logmanager.Level.WARN; break;
-            case LocationAwareLogger.ERROR_INT: level = org.jboss.logmanager.Level.ERROR; break;
-            default: level = org.jboss.logmanager.Level.DEBUG; break;
+            case LocationAwareLogger.TRACE_INT:
+                level = org.jboss.logmanager.Level.TRACE;
+                break;
+            case LocationAwareLogger.DEBUG_INT:
+                level = org.jboss.logmanager.Level.DEBUG;
+                break;
+            case LocationAwareLogger.INFO_INT:
+                level = org.jboss.logmanager.Level.INFO;
+                break;
+            case LocationAwareLogger.WARN_INT:
+                level = org.jboss.logmanager.Level.WARN;
+                break;
+            case LocationAwareLogger.ERROR_INT:
+                level = org.jboss.logmanager.Level.ERROR;
+                break;
+            default:
+                level = org.jboss.logmanager.Level.DEBUG;
+                break;
         }
         if (logger.isLoggable(level)) {
             final String message = MessageFormatter.arrayFormat(fmt, argArray).getMessage();
@@ -561,11 +574,13 @@ public final class Slf4jLogger implements Serializable, LocationAwareLogger {
         logger.logRaw(rec);
     }
 
-    private void log(final Marker marker, final java.util.logging.Level level, final String message, final Throwable t, final Object... params) {
+    private void log(final Marker marker, final java.util.logging.Level level, final String message, final Throwable t,
+            final Object... params) {
         log(marker, level, LOGGER_CLASS_NAME, message, t, params);
     }
 
-    private void log(final Marker marker, final java.util.logging.Level level, final String fqcn, final String message, final Throwable t, final Object[] params) {
+    private void log(final Marker marker, final java.util.logging.Level level, final String fqcn, final String message,
+            final Throwable t, final Object[] params) {
         final ExtLogRecord rec = new ExtLogRecord(level, message, ExtLogRecord.FormatStyle.NO_FORMAT, fqcn);
         rec.setThrown(t);
         rec.setParameters(params);
@@ -588,7 +603,8 @@ public final class Slf4jLogger implements Serializable, LocationAwareLogger {
     static {
         MethodHandle setMarker = null;
         try {
-            setMarker = MethodHandles.lookup().findVirtual(ExtLogRecord.class, "setMarker", MethodType.methodType(void.class, Object.class));
+            setMarker = MethodHandles.lookup().findVirtual(ExtLogRecord.class, "setMarker",
+                    MethodType.methodType(void.class, Object.class));
         } catch (ReflectiveOperationException ignored) {
             // old version of jboss-logmanager
         } finally {

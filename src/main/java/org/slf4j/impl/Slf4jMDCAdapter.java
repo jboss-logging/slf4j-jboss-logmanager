@@ -20,8 +20,9 @@
 package org.slf4j.impl;
 
 import java.util.Map;
-import org.slf4j.spi.MDCAdapter;
+
 import org.jboss.logmanager.MDC;
+import org.slf4j.spi.MDCAdapter;
 
 public final class Slf4jMDCAdapter implements MDCAdapter {
 
