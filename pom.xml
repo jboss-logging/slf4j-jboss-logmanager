@@ -63,7 +63,7 @@
 
     <properties>
         <version.org.jboss.logmanager>2.1.19.Final</version.org.jboss.logmanager>
-        <version.org.slf4j>1.7.36</version.org.slf4j>
+        <version.org.slf4j>2.0.6</version.org.slf4j>
         <!-- Test dependencies -->
         <version.org.junit>5.9.2</version.org.junit>
     </properties>
@@ -103,9 +103,6 @@
 
     <build>
         <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
             <plugin>
                 <groupId>net.revelc.code.formatter</groupId>
                 <artifactId>formatter-maven-plugin</artifactId>
@@ -170,6 +167,36 @@
                                 </configuration>
                             </execution>
                         </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>slf4j-legacy-test</id>
+            <activation>
+                <property>
+                    <name>legacy.test</name>
+                </property>
+            </activation>
+            <properties>
+                <version.org.slf4j>1.7.36</version.org.slf4j>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <skip>true</skip>
+                            <skipMain>true</skipMain>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <failIfNoTests>true</failIfNoTests>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
