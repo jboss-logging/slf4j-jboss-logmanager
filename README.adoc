@@ -1,0 +1,25 @@
+= SLF4J Binding to JBoss Logging
+
+The https://www.slf4j.org/[SLFJ4J] binding to the JBoss Log Manager is just as it sounds. It's a
+https://www.slf4j.org/manual.html#swapping[SLF4J binding] which sends log messages through the JBoss Log Manager. This
+project is currently used in https://wildfly.org[WildFly] and
+https://www.redhat.com/en/technologies/jboss-middleware/application-platform[JBoss EAP].
+
+== Usage
+
+To use the project you need both SLF4J and JBoss Log Manager on your class path. Then simply add this library and it should
+be picked up as the SLF4J binding.
+
+=== Maven
+[source,xml]
+----
+<dependency>
+    <groupId>org.jboss.logging</groupId>
+    <artifactId>slf4j-jboss-logmanager</artifactId>
+    <version>1.2.0.Final</version>
+</dependency>
+----
+
+== Contributing
+
+See the link:CONTRIBUTING.adoc[contributing guide].
