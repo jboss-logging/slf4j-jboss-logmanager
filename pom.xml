@@ -62,10 +62,23 @@
     </licenses>
 
     <properties>
-        <version.junit>4.13.2</version.junit>
         <version.org.jboss.logmanager>2.1.18.Final</version.org.jboss.logmanager>
         <version.org.slf4j>1.7.36</version.org.slf4j>
+        <!-- Test dependencies -->
+        <version.org.junit>5.9.2</version.org.junit>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>${version.org.junit}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -82,9 +95,8 @@
         </dependency>
         <!-- Test Dependencies -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${version.junit}</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
