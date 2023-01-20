@@ -1,7 +1,7 @@
 /*
  * JBoss, Home of Professional Open Source.
  *
- * Copyright 2014 Red Hat, Inc., and individual contributors
+ * Copyright 2023 Red Hat, Inc., and individual contributors
  * as indicated by the @author tags.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,6 +21,7 @@ package org.slf4j.impl;
 
 import org.slf4j.spi.MDCAdapter;
 
+@Deprecated(forRemoval = true)
 public final class StaticMDCBinder {
 
     public static final StaticMDCBinder SINGLETON = new StaticMDCBinder();

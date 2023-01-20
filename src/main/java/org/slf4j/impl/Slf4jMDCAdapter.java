@@ -22,30 +22,37 @@ package org.slf4j.impl;
 import java.util.Map;
 
 import org.jboss.logmanager.MDC;
+import org.slf4j.helpers.BasicMDCAdapter;
 import org.slf4j.spi.MDCAdapter;
 
-public final class Slf4jMDCAdapter implements MDCAdapter {
+public final class Slf4jMDCAdapter extends BasicMDCAdapter implements MDCAdapter {
 
+    @Override
     public void put(final String key, final String val) {
         MDC.put(key, val);
     }
 
+    @Override
     public String get(final String key) {
         return MDC.get(key);
     }
 
+    @Override
     public void remove(final String key) {
         MDC.remove(key);
     }
 
+    @Override
     public void clear() {
         MDC.clear();
     }
 
+    @Override
     public Map<String, String> getCopyOfContextMap() {
         return MDC.copy();
     }
 
+    @Override
     public void setContextMap(final Map contextMap) {
         MDC.clear();
         for (Map.Entry<?, ?> entry : ((Map<?, ?>) contextMap).entrySet()) {

@@ -1,7 +1,7 @@
 /*
  * JBoss, Home of Professional Open Source.
  *
- * Copyright 2014 Red Hat, Inc., and individual contributors
+ * Copyright 2023 Red Hat, Inc., and individual contributors
  * as indicated by the @author tags.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,6 +23,7 @@ import org.slf4j.IMarkerFactory;
 import org.slf4j.helpers.BasicMarkerFactory;
 import org.slf4j.spi.MarkerFactoryBinder;
 
+@Deprecated(forRemoval = true)
 public final class StaticMarkerBinder implements MarkerFactoryBinder {
 
     public static final StaticMarkerBinder SINGLETON = new StaticMarkerBinder();
