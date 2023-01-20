@@ -20,6 +20,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.jboss.logging</groupId>
+        <artifactId>logging-parent</artifactId>
+        <version>1.0.0.Final</version>
+    </parent>
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -30,17 +35,23 @@
 
     <name>SLF4J: JBoss Log Manager</name>
 
-    <parent>
-        <groupId>org.jboss</groupId>
-        <artifactId>jboss-parent</artifactId>
-        <version>37</version>
-    </parent>
 
-    <properties>
-        <version.junit>4.13.2</version.junit>
-        <version.org.jboss.logmanager>2.1.18.Final</version.org.jboss.logmanager>
-        <version.org.slf4j>1.7.36</version.org.slf4j>
-    </properties>
+    <scm child.scm.connection.inherit.append.path="false" child.scm.developerConnection.inherit.append.path="false"
+         child.scm.url.inherit.append.path="false">
+        <connection>scm:git:git://github.com/jboss-logging/slf4j-jboss-logging.git</connection>
+        <developerConnection>scm:git:git@github.com:jboss-logging/slf4j-jboss-logging.git</developerConnection>
+        <url>https://github.com/jboss-logging/slf4j-jboss-logging/tree/main/</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>James R. Perkins</name>
+            <email>jperkins@redhat.com</email>
+            <organization>Red Hat, Inc.</organization>
+            <organizationUrl>https://redhat.com</organizationUrl>
+        </developer>
+    </developers>
 
     <licenses>
         <license>
@@ -50,16 +61,12 @@
         </license>
     </licenses>
 
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <artifactId>maven-source-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+    <properties>
+        <version.junit>4.13.2</version.junit>
+        <version.org.jboss.logmanager>2.1.18.Final</version.org.jboss.logmanager>
+        <version.org.slf4j>1.7.36</version.org.slf4j>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.jboss.logmanager</groupId>
@@ -73,6 +80,7 @@
             <version>${version.org.slf4j}</version>
             <scope>provided</scope>
         </dependency>
+        <!-- Test Dependencies -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -80,4 +88,15 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>
