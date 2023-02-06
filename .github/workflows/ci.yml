@@ -15,8 +15,8 @@ on:
       - "dco.txt"
       - "LICENSE"
       - "README.md"
-      - "security.txt"
-      - "*/README.MD"
+      - "SECURITY.md"
+      - "*/README.adoc"
   pull_request:
     branches:
       - '**'
