@@ -43,7 +43,7 @@ jobs:
       - name: Build with Maven Java ${{ matrix.java }} - ${{ matrix.os }}
         run:  |
           mvn clean install -U -B -fae
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: surefire-reports-${{ matrix.os }}-${{ matrix.java }}
@@ -68,7 +68,7 @@ jobs:
             run:  |
                 mvn clean install -U -B
                 mvn test -Dlegacy.test
-          - uses: actions/upload-artifact@v3
+          - uses: actions/upload-artifact@v4
             if: failure()
             with:
                 name: legacy-surefire-reports-${{ matrix.java }}
