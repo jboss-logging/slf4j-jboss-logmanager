@@ -560,7 +560,7 @@ public final class Slf4jLogger implements Serializable, LocationAwareLogger {
         if (ALT_ERROR_INT < logger.getEffectiveLevel()) {
             return;
         }
-        log(null, org.jboss.logmanager.Level.ERROR, msg, t);
+        log(marker, org.jboss.logmanager.Level.ERROR, msg, t);
     }
 
     protected Object readResolve() throws ObjectStreamException {
