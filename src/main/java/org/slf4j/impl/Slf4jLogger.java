@@ -26,6 +26,7 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
 import org.jboss.logmanager.ExtLogRecord;
+import org.jboss.logmanager.ExtLogRecord.FormatStyle;
 import org.jboss.logmanager.Level;
 import org.jboss.logmanager.Logger;
 import org.slf4j.Marker;
@@ -568,7 +569,7 @@ public final class Slf4jLogger implements Serializable, LocationAwareLogger {
     }
 
     private void log(final Marker marker, final java.util.logging.Level level, final String message, final Throwable t) {
-        final ExtLogRecord rec = new ExtLogRecord(level, message, LOGGER_CLASS_NAME);
+        final ExtLogRecord rec = new ExtLogRecord(level, message, FormatStyle.NO_FORMAT, LOGGER_CLASS_NAME);
         rec.setThrown(t);
         setMarker(rec, marker);
         logger.logRaw(rec);

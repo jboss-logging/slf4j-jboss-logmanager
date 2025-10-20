@@ -27,6 +27,7 @@ import java.util.logging.LogRecord;
 
 import org.jboss.logmanager.ExtHandler;
 import org.jboss.logmanager.ExtLogRecord;
+import org.jboss.logmanager.ExtLogRecord.FormatStyle;
 import org.jboss.logmanager.LogContext;
 import org.jboss.logmanager.LogContextSelector;
 import org.junit.jupiter.api.AfterAll;
@@ -129,6 +130,16 @@ public class LoggerTestCase {
         MDC.put(key, "value");
         Assertions.assertEquals("value", MDC.get(key), "MDC value should be \"value\"");
         Assertions.assertEquals("value", org.jboss.logmanager.MDC.get(key), "MDC value should be \"value\"");
+    }
+
+    @Test
+    public void testLoggerNoFormat() {
+        final Logger logger = LoggerFactory.getLogger(LoggerTestCase.class);
+        final Marker marker = new BasicMarkerFactory().getMarker("test");
+
+        logger.info(marker, "log message {foo}");
+        LogRecord record = HANDLER.messages.poll();
+        Assertions.assertEquals(FormatStyle.NO_FORMAT, ((ExtLogRecord) record).getFormatStyle());
     }
 
     private static Supplier<String> expectedTypeMessage(final Class<?> expected, final Class<?> found) {
