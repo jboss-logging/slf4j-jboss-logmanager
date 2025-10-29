@@ -17,7 +17,7 @@ be picked up as the SLF4J binding.
 [source,xml]
 ----
 <dependency>
-    <groupId>org.jboss.logging</groupId>
+    <groupId>org.jboss.slf4j</groupId>
     <artifactId>slf4j-jboss-logmanager</artifactId>
     <version>${version.org.jboss.logging.slf4j-jboss-logmanager}</version>
 </dependency>
