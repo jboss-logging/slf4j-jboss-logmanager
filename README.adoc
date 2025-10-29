@@ -19,10 +19,24 @@ be picked up as the SLF4J binding.
 <dependency>
     <groupId>org.jboss.logging</groupId>
     <artifactId>slf4j-jboss-logmanager</artifactId>
-    <version>1.2.0.Final</version>
+    <version>${version.org.jboss.logging.slf4j-jboss-logmanager}</version>
 </dependency>
 ----
 
 == Contributing
 
 See the link:CONTRIBUTING.adoc[contributing guide].
+
+== Releasing
+
+Releasing this project requires access to https://repository.jboss.org/nexus[JBoss Nexus].
+
+To perform a release ensure you're on the correct branch and that branch is up to date. Once done you can simply use
+the `release.sh` bash script.
+
+[source,bash]
+----
+./release.sh -r 2.0.2.Final -d 2.0.3.Final-SNAPSHOT
+----
+
+If this was successful, instructions will be printed on the console with the next set of instructions for processing.

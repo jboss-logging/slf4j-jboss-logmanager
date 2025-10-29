@@ -30,49 +30,52 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest ]
-        java: ['11', '17']
 
     steps:
       - uses: actions/checkout@v5
-      - name: Set up JDK ${{ matrix.java }}
+      - name: Set up JDK's
         uses: actions/setup-java@v5
         with:
-          java-version: ${{ matrix.java }}
           distribution: 'temurin'
           cache: 'maven'
-      - name: Build with Maven Java ${{ matrix.java }} - ${{ matrix.os }}
+          java-version: |
+              11
+              17
+              21
+              25
+      - name: Build with Maven - ${{ matrix.os }}
         run:  |
-          mvn clean install -U -B -fae
+          mvn clean install -U -B -fae '-Djava11.home=${{env.JAVA_HOME_11_X64}}' '-Djava17.home=${{env.JAVA_HOME_17_X64}}' '-Djava21.home=${{env.JAVA_HOME_21_X64}}'
       - uses: actions/upload-artifact@v5
         if: failure()
         with:
-          name: surefire-reports-${{ matrix.os }}-${{ matrix.java }}
-          path: '**/surefire-reports/*.txt'
+          name: surefire-reports-${{ matrix.os }}
+          path: '**/surefire-reports/'
   legacy-test:
       runs-on: ubuntu-latest
       timeout-minutes: 90
-      strategy:
-          fail-fast: false
-          matrix:
-              java: ['11', '17']
 
       steps:
           - uses: actions/checkout@v5
-          - name: Set up JDK ${{ matrix.java }}
+          - name: Set up JDK's
             uses: actions/setup-java@v5
             with:
-                java-version: ${{ matrix.java }}
                 distribution: 'temurin'
                 cache: 'maven'
-          - name: Legacy Test - Java ${{ matrix.java }}
+                java-version: |
+                    11
+                    17
+                    21
+                    25
+          - name: Legacy Test
             run:  |
                 mvn clean install -U -B
-                mvn test -Dlegacy.test
+                mvn test -Dlegacy.test -Djava11.home=${{env.JAVA_HOME_11_X64}} -Djava17.home=${{env.JAVA_HOME_17_X64}} -Djava21.home=${{env.JAVA_HOME_21_X64}}
           - uses: actions/upload-artifact@v5
             if: failure()
             with:
-                name: legacy-surefire-reports-${{ matrix.java }}
-                path: '**/surefire-reports/*.txt'
+                name: legacy-surefire-reports
+                path: '**/surefire-reports/'
 
   format-check:
     runs-on: ubuntu-latest
@@ -80,10 +83,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v5
-      - name: Set up JDK 11
+      - name: Set up JDK 21
         uses: actions/setup-java@v5
         with:
-          java-version: 11
+          java-version: 21
           distribution: 'temurin'
           cache: 'maven'
       - name: Validate Formatting
