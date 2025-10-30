@@ -86,8 +86,7 @@
         <signTag>true</signTag>
         <tagNameFormat>@{project.version}</tagNameFormat>
         <arguments>-DskipTests</arguments>
-        <!-- Do not push changes by default when using the maven-release-plugin:prepare -->
-        <pushChanges>false</pushChanges>
+        <pushChanges>true</pushChanges>
         <!-- Use the local directory when using perform -->
         <localCheckout>true</localCheckout>
         <!--JBoss Nexus properties -->
