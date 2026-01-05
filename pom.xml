@@ -70,7 +70,7 @@
         <maven.compiler.release>11</maven.compiler.release>
 
         <!-- Dependency versions -->
-        <version.org.jboss.logmanager>2.1.19.Final</version.org.jboss.logmanager>
+        <version.org.jboss.logmanager>3.1.2.Final</version.org.jboss.logmanager>
         <version.org.slf4j>2.0.17</version.org.slf4j>
 
         <!-- Plugin versions -->
