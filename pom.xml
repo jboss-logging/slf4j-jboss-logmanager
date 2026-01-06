@@ -70,7 +70,7 @@
         <maven.compiler.release>11</maven.compiler.release>
 
         <!-- Dependency versions -->
-        <version.org.jboss.logmanager>2.1.19.Final</version.org.jboss.logmanager>
+        <version.org.jboss.logmanager>3.1.2.Final</version.org.jboss.logmanager>
         <version.org.slf4j>2.0.17</version.org.slf4j>
 
         <!-- Plugin versions -->
@@ -136,6 +136,19 @@
                         <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
                     </systemPropertyVariables>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.github.dmlloyd.maven</groupId>
+                <artifactId>module-services-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <id>generate-services</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>net.revelc.code.formatter</groupId>
