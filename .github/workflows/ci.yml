@@ -39,13 +39,13 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
           java-version: |
-              11
               17
               21
               25
+              26-ea
       - name: Build with Maven - ${{ matrix.os }}
         run:  |
-          ./mvnw clean verify -U -B -fae '-Djava11.home=${{env.JAVA_HOME_11_X64}}' '-Djava17.home=${{env.JAVA_HOME_17_X64}}' '-Djava21.home=${{env.JAVA_HOME_21_X64}}'
+          ./mvnw clean verify -U -B -fae '-Djava17.home=${{env.JAVA_HOME_17_X64}}' '-Djava21.home=${{env.JAVA_HOME_21_X64}}' '-Djava25.home=${{env.JAVA_HOME_25_X64}}'
       - uses: actions/upload-artifact@v6
         if: failure()
         with:
@@ -63,14 +63,13 @@ jobs:
                 distribution: 'temurin'
                 cache: 'maven'
                 java-version: |
-                    11
                     17
                     21
                     25
           - name: Legacy Test
             run:  |
                 ./mvnw clean install -U -B
-                ./mvnw test -Dlegacy.test -Djava11.home=${{env.JAVA_HOME_11_X64}} -Djava17.home=${{env.JAVA_HOME_17_X64}} -Djava21.home=${{env.JAVA_HOME_21_X64}}
+                ./mvnw test -Dlegacy.test -Djava17.home=${{env.JAVA_HOME_17_X64}} -Djava21.home=${{env.JAVA_HOME_21_X64}} '-Djava25.home=${{env.JAVA_HOME_25_X64}}'
           - uses: actions/upload-artifact@v6
             if: failure()
             with:
