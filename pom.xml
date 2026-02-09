@@ -79,7 +79,7 @@
         <version.impsort.maven.plugin>1.13.0</version.impsort.maven.plugin>
 
         <!-- Test dependencies -->
-        <version.org.junit>5.14.0</version.org.junit>
+        <version.org.junit>6.0.2</version.org.junit>
 
         <!-- maven-release-plugin configuration -->
         <autoVersionSubmodules>true</autoVersionSubmodules>
