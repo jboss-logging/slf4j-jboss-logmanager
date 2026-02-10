@@ -129,7 +129,7 @@ fi
 # Find the expected Server ID
 # We temporarily disable set -e here because mvn might fail if args are bad, and we want to capture that
 set +e
-SERVER_ID=$("${MVN}" help:evaluate -Dexpression=central.serverId -q -DforceStdout "${MAVEN_ARGS[@]}" | sed 's/^\[INFO\] \[stdout\] //')
+SERVER_ID=$("${MVN}" help:evaluate -Dexpression=nexus.serverId -q -DforceStdout "${MAVEN_ARGS[@]}" | sed 's/^\[INFO\] \[stdout\] //')
 RET_CODE=$?
 set -e
 
@@ -153,7 +153,7 @@ fi
 
 printf "Performing release for version %s with the next version of %s\n" "${RELEASE_VERSION}" "${DEVEL_VERSION}"
 
-TAG_NAME="v${RELEASE_VERSION}"
+TAG_NAME="${RELEASE_VERSION}"
 MVN_FLAGS=()
 
 if ${DRY_RUN}; then
