@@ -83,21 +83,16 @@
 
         <!-- maven-release-plugin configuration -->
         <autoVersionSubmodules>true</autoVersionSubmodules>
-        <releaseProfiles>central-release</releaseProfiles>
+        <releaseProfiles>jboss-release</releaseProfiles>
         <signTag>true</signTag>
-        <tagNameFormat>v@{project.version}</tagNameFormat>
-        <arguments>-DskipTests -Dcentral.autoPublish=${central.autoPublish} -Dcentral.waitUntil=${central.waitUntil}</arguments>
-        <!-- Do not push changes by default when using the maven-release-plugin:prepare -->
+        <tagNameFormat>@{project.version}</tagNameFormat>
+        <arguments>-DskipTests</arguments>
         <pushChanges>true</pushChanges>
         <!-- Use the local directory when using perform -->
         <localCheckout>true</localCheckout>
-        <!-- Maven Central properties -->
-        <central.sonatype.url>https://central.sonatype.com</central.sonatype.url>
-        <central.serverId>central</central.serverId>
-        <central.deploymentName>${project.artifactId}-${project.version}</central.deploymentName>
-        <central.autoPublish>true</central.autoPublish>
-        <central.waitUntil>validated</central.waitUntil>
-        <central.skipPublishing>false</central.skipPublishing>
+        <!--JBoss Nexus properties -->
+        <nexus.repository.release>jboss-common</nexus.repository.release>
+        <nexus.staging.tag>slf4j-jboss-logmanager-${project.version}</nexus.staging.tag>
     </properties>
 
     <dependencyManagement>
@@ -290,79 +285,6 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <configuration>
                             <failIfNoTests>true</failIfNoTests>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>central-release</id>
-
-            <distributionManagement>
-                <snapshotRepository>
-                    <id>${central.serverId}</id>
-                    <url>${central.sonatype.url}</url>
-                </snapshotRepository>
-                <repository>
-                    <id>${central.serverId}</id>
-                    <url>${central.sonatype.url}</url>
-                </repository>
-            </distributionManagement>
-
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>attach-sources</id>
-                                <goals>
-                                    <goal>jar-no-fork</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>aggregate-javadoc</id>
-                                <goals>
-                                    <goal>aggregate</goal>
-                                </goals>
-                                <phase>package</phase>
-                            </execution>
-                            <execution>
-                                <id>attach-javadocs</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.sonatype.central</groupId>
-                        <artifactId>central-publishing-maven-plugin</artifactId>
-                        <version>${version.central.publishing.maven.plugin}</version>
-                        <extensions>true</extensions>
-                        <configuration>
-                            <publishingServerId>${central.serverId}</publishingServerId>
-                            <autoPublish>${central.autoPublish}</autoPublish>
-                            <waitUntil>${central.waitUntil}</waitUntil>
-                            <deploymentName>${central.deploymentName}</deploymentName>
-                            <skipPublishing>${central.skipPublishing}</skipPublishing>
                         </configuration>
                     </plugin>
                 </plugins>
