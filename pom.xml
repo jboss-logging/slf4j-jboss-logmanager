@@ -71,7 +71,7 @@
 
         <!-- Dependency versions -->
         <version.org.jboss.logmanager>3.2.0.Final</version.org.jboss.logmanager>
-        <version.org.slf4j>2.0.17</version.org.slf4j>
+        <version.org.slf4j>2.0.18</version.org.slf4j>
 
         <!-- Plugin versions -->
         <version.central.publishing.maven.plugin>0.10.0</version.central.publishing.maven.plugin>
